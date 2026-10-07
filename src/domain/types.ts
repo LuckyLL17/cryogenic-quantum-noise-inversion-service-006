@@ -52,12 +52,18 @@ export type WindowedSeries = {
   startNs: number;
   endNs: number;
   sampleRateHz: number;
+  /** Measured timestamp of every sample; window boundaries are derived from these, never from an averaged rate. */
+  timestampsNs: number[];
+  /** Largest residual (ns) between measured timestamps and the nominal uniform sample grid. */
+  jitterNs: number;
+  nominalPeriodNs: number;
   values: number[];
   weights: number[];
 };
 
 export type SpectrumBin = { frequencyHz: number; power: number; amplitude: number };
-export type CrossSpectrumBin = SpectrumBin & { coherence: number; phaseRad: number };
+/** coherence is null when it cannot be estimated (fewer than two independent segments). */
+export type CrossSpectrumBin = SpectrumBin & { coherence: number | null; phaseRad: number };
 
 export type DecayFit = {
   model: 'exponential';
