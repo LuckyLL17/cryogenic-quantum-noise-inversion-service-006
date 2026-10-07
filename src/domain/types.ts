@@ -57,7 +57,7 @@ export type WindowedSeries = {
 };
 
 export type SpectrumBin = { frequencyHz: number; power: number; amplitude: number };
-export type CrossSpectrumBin = SpectrumBin & { coherence: number; phaseRad: number };
+export type CrossSpectrumBin = SpectrumBin & { coherence: number | null; phaseRad: number };
 
 export type DecayFit = {
   model: 'exponential';
